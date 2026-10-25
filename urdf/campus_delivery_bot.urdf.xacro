@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<robot name="campus_delivery_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find campus_delivery_robot)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find campus_delivery_robot)/urdf/base/bot_base.xacro"/>
+  <xacro:include filename="$(find campus_delivery_robot)/urdf/body/main_body.xacro"/>
+  <xacro:include filename="$(find campus_delivery_robot)/urdf/sensors/bot_lidar.xacro"/>
+  <xacro:include filename="$(find campus_delivery_robot)/urdf/wheels/bot_wheels.xacro"/>
+  <xacro:include filename="$(find campus_delivery_robot)/urdf/sensors/bot_cam.xacro"/>
+  <xacro:bot_base prefix=""/>
+  <xacro:cam_face prefix=""/>
+  <xacro:main_body prefix=""/>
+  <xacro:bot_lidar prefix=""/>
+  <xacro:bot_lid prefix=""/>
+  <xacro:bot_wheel prefix="left_" reflect="1"/>
+  <xacro:bot_wheel prefix="right_" reflect="-1"/>
+  <xacro:bot_castor prefix="front_" reflect="1"/>
+  <xacro:bot_castor prefix="rear_" reflect="-1"/>
+</robot>

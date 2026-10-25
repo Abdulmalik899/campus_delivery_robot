@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="campus_delivery_robot">
+    <xacro:property name="base_length" value="0.9" />
+    <xacro:property name="base_width" value="0.6" />
+    <xacro:property name="base_height" value="0.2" />
+    <xacro:property name="ground_clearance" value="0.1" />
+  
+
+    <xacro:macro name="bot_base" params="prefix">
+        <link name="base_floor"/>
+        <link name="base_link">
+
+            <visual>
+                <geometry>
+                    <box size="${base_length} ${base_width} ${base_height}" />
+                </geometry>
+                <origin xyz="0 0 ${ground_clearance}" rpy="0 0 0"/>
+                <material name="black"/> 
+            </visual>
+
+            <collision>
+                <geometry>
+                    <box size="${base_length} ${base_width} ${base_height}" />
+                </geometry>
+                <origin xyz="0 0 ${ground_clearance}" rpy="0 0 0"/>
+        
+            </collision>
+
+        </link>
+        <joint name="base_floor_joint" type="fixed">
+            <parent link="base_floor"/>
+            <child link="base_link"/>
+            <origin xyz="0 0 ${wheel_radius/2}" rpy="0 0 0"/>
+        </joint>
+    </xacro:macro>  
+
+
+
+
+</robot>
+   
+    

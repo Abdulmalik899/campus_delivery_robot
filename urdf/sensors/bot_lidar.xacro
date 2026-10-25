@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="campus_delivery_robot">
+   <xacro:property name="sensor_mount_height" value="0.1"/>
+   <xacro:property name="sensor_mount_length" value="0.09"/>
+   <xacro:property name="sensor_mount_width" value="0.6"/>
+   <xacro:property name="sensor_mount_x_off" value="0.4"/>
+   <xacro:property name="lidar_radius" value="0.06"/>
+   <xacro:property name="lidar_height" value="0.06"/>
+  
+
+  <xacro:macro name="bot_lidar" params="prefix">
+    <link name="sensor_mount_link">
+    <visual>
+    <geometry>
+       <box size="${sensor_mount_length} ${sensor_mount_width} ${sensor_mount_height}"/>
+        </geometry> 
+        <origin xyz="0 0 ${sensor_mount_height/2}" rpy="0 0 0"/>
+          <material name="blue"/>  
+
+    </visual>
+    <collision>
+           <geometry>
+       <box size="${sensor_mount_length} ${sensor_mount_width} ${sensor_mount_height}"/>
+        </geometry> 
+        <origin xyz="0 0 ${sensor_mount_height/2}" rpy="0 0 0"/>
+    </collision>
+    </link> 
+    <joint name="base_sensor_mount_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="sensor_mount_link"/>
+            <origin xyz="${sensor_mount_x_off} 0 ${base_height + main_base_height}" rpy="0 0 0"/>
+        </joint>
+ 
+
+     <link name="lidar_sensor_link">
+        <visual>
+        <geometry>
+         <cylinder radius="${lidar_radius}" length="${lidar_height}"/>
+        </geometry>
+        <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
+        <material name="white"/>
+        </visual>
+        <collision>
+        <geometry>
+         <cylinder radius="${lidar_radius}" length="${lidar_height}"/>
+        </geometry>
+        <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
+        </collision>
+     </link>
+
+      <joint name="lidar_sensor_joint" type="fixed">
+            <parent link="sensor_mount_link"/>
+            <child link="lidar_sensor_link"/>
+            <origin xyz="0 0 ${sensor_mount_height}" rpy="0 0 0"/>
+      
+      </joint>
+
+  </xacro:macro>
+
+
+</robot>
+  
