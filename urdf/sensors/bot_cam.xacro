@@ -1,87 +1,36 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
-  <xacro:property name="screen_width" value="${base_width - 0.1}"/>
-  <xacro:property name="screen_height" value="0.4"/>
-  <xacro:property name="screen_depth" value="0.003"/>
-  <xacro:property name="eye_radius" value="0.035"/>
-  <xacro:property name="eye_spacing" value="0.12"/>
+  
+ 
+ 
   <xacro:property name="camera_radius" value="0.015"/>
-  <xacro:property name="eye_padding_xaxis" value="0.002"/>
-  <xacro:property name="eye_elevation" value="0.03"/>
   <xacro:property name="cam_z_padding" value="0.05"/>
   <xacro:property name="camera_length" value="0.006"/>
+  <xacro:property name="cam_z_elevation" value="${base_height + hatch_main_base_height*1.5}"/>
    
    
-   <xacro:macro name="cam_face" params="prefix">
-    
-    <link name="screen_link">
-    <visual>
-      <geometry>
-        <box size="${screen_width} ${screen_depth} ${screen_height}"/>      
-      </geometry>
-      <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
-      <material name="black"/>
-    </visual>
-    <collision>
-      <geometry>
-        <box size="${screen_width} ${screen_depth} ${screen_height}"/>      
-      </geometry>
-      <origin xyz="0 0 0" rpy="0 0 ${pi/2}"/>
-    </collision>
-    
-      <visual>
-        <geometry>
-          <cylinder radius="${eye_radius}" length="0.004"/>
-        </geometry>
-        <origin xyz="${screen_depth/2 + eye_padding_xaxis} ${eye_spacing} ${eye_elevation}" rpy="0 ${pi/2} 0"/>
-     
-      </visual>
-
-      <collision>
-      <geometry>
-          <cylinder radius="${eye_radius}" length="0.004"/>
-        </geometry>
-        <origin xyz="${screen_depth/2 + eye_padding_xaxis} ${eye_spacing} ${eye_elevation}" rpy="0 ${pi/2} 0"/>
-      </collision>
-
-      <!-- right eye -->
-      <visual>
-        <geometry>
-          <cylinder radius="${eye_radius}" length="0.004"/>
-        </geometry>
-        <origin xyz="${screen_depth/2 + eye_padding_xaxis} ${-eye_spacing} ${eye_elevation}" rpy="0 ${pi/2} 0"/>
-       
-      </visual>
-       <collision>
-       <geometry>
-          <cylinder radius="${eye_radius}" length="0.004"/>
-        </geometry>
-        <origin xyz="${screen_depth/2 + eye_padding_xaxis} ${-eye_spacing} ${eye_elevation}" rpy="0 ${pi/2} 0"/>
-       </collision>
-
-    </link>
-
-    <joint name="screen_joint" type="fixed">
-      <parent link="base_link"/>
-      <child link="screen_link"/>
-      <origin xyz="${main_base_length/2  } 0 ${main_base_height/2 + screen_height/2}" rpy="0 0 0"/>
-    </joint>
-
+  <xacro:macro name="cam_face" params="prefix">
 
     <link name="camera_link">
   <visual>
     <geometry>
       <cylinder radius="${camera_radius}" length="${camera_length}"/>
     </geometry>
-    <origin xyz="0 0 0" rpy="0 ${pi/2} 0"/>
-    <material name="blue"/>
+    <origin xyz="${camera_length/2} 0 0" rpy="0 ${pi/2} 0"/>
+    <material name="black"/>
   </visual>
+  <collision>
+    <geometry>
+      <cylinder radius="${camera_radius}" length="${camera_length}"/>
+    </geometry>
+    <origin xyz="${camera_length/2} 0 0" rpy="0 ${pi/2} 0"/>
+  </collision>
 </link>
 
 <joint name="camera_joint" type="fixed">
-  <parent link="screen_link"/>
+  <parent link="base_link"/>
   <child link="camera_link"/>
-  <origin xyz="${screen_depth/2 + camera_length/2 } 0 ${screen_height/2 - cam_z_padding}" rpy="0 0 0"/>
+  <origin xyz="${base_length/2} 0 ${cam_z_elevation}" rpy="0 0 0"/>
 </joint>
 
   </xacro:macro>

@@ -8,9 +8,11 @@
   <xacro:include filename="$(find campus_delivery_robot)/urdf/sensors/bot_cam.xacro"/>
   <xacro:bot_base prefix=""/>
   <xacro:cam_face prefix=""/>
-  <xacro:main_body prefix=""/>
+  <xacro:main_body_below_hatch prefix=""/>
+  <xacro:below_hatch_door prefix=""/>
+  <xacro:above_hatch_door prefix=""/>
+  <xacro:main_body_above_hatch prefix=""/>
   <xacro:bot_lidar prefix=""/>
-  <xacro:bot_lid prefix=""/>
   <xacro:bot_wheel prefix="left_" reflect="1"/>
   <xacro:bot_wheel prefix="right_" reflect="-1"/>
   <xacro:bot_castor prefix="front_" reflect="1"/>

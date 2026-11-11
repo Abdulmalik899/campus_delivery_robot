@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="campus_delivery_robot">
-   <xacro:property name="sensor_mount_height" value="0.1"/>
-   <xacro:property name="sensor_mount_length" value="0.09"/>
-   <xacro:property name="sensor_mount_width" value="0.6"/>
-   <xacro:property name="sensor_mount_x_off" value="0.4"/>
-   <xacro:property name="lidar_radius" value="0.06"/>
-   <xacro:property name="lidar_height" value="0.06"/>
+   <xacro:property name="sensor_mount_height" value="0.03"/>
+   <xacro:property name="sensor_mount_length" value="0.1"/>
+   <xacro:property name="sensor_mount_width" value="0.1"/>
+   <xacro:property name="sensor_mount_x_off" value="0"/>
+   <xacro:property name="lidar_radius" value="0.04"/>
+   <xacro:property name="lidar_height" value="0.04"/>
   
 
   <xacro:macro name="bot_lidar" params="prefix">
@@ -29,7 +29,7 @@
     <joint name="base_sensor_mount_joint" type="fixed">
             <parent link="base_link"/>
             <child link="sensor_mount_link"/>
-            <origin xyz="${sensor_mount_x_off} 0 ${base_height + main_base_height}" rpy="0 0 0"/>
+            <origin xyz="${sensor_mount_x_off} 0 ${ base_height + main_base_height }" rpy="0 0 0"/>
         </joint>
  
 
