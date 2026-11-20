@@ -5,8 +5,10 @@
    <xacro:property name="sensor_mount_length" value="0.1"/>
    <xacro:property name="sensor_mount_width" value="0.1"/>
    <xacro:property name="sensor_mount_x_off" value="0"/>
+   <xacro:property name="sensor_mount_mass" value="0.01"/>
    <xacro:property name="lidar_radius" value="0.04"/>
    <xacro:property name="lidar_height" value="0.04"/>
+   <xacro:property name="lidar_mass" value="0.12"/>
   
 
   <xacro:macro name="bot_lidar" params="prefix">
@@ -25,6 +27,11 @@
         </geometry> 
         <origin xyz="0 0 ${sensor_mount_height/2}" rpy="0 0 0"/>
     </collision>
+    
+    <xacro:box_inertia m="${sensor_mount_mass}" x="${sensor_mount_length}" y="${sensor_mount_width}" z="${sensor_mount_height}">
+                <origin xyz="0 0 ${sensor_mount_height/2}" rpy="0 0 0"/>
+   </xacro:box_inertia>
+
     </link> 
     <joint name="base_sensor_mount_joint" type="fixed">
             <parent link="base_link"/>
@@ -34,19 +41,26 @@
  
 
      <link name="lidar_sensor_link">
-        <visual>
-        <geometry>
-         <cylinder radius="${lidar_radius}" length="${lidar_height}"/>
-        </geometry>
-        <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
-        <material name="white"/>
-        </visual>
+         <visual>
+           <geometry>
+              <cylinder radius="${lidar_radius}" length="${lidar_height}"/>
+           </geometry>
+           <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
+              <material name="white"/>
+         </visual>
+
+
         <collision>
-        <geometry>
-         <cylinder radius="${lidar_radius}" length="${lidar_height}"/>
-        </geometry>
-        <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
+          <geometry>
+           <cylinder radius="${lidar_radius}" length="${lidar_height}"/>
+         </geometry>
+         <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
         </collision>
+      
+      <xacro:cylinder_inertia m="${lidar_mass}" r="${lidar_radius}" h="${lidar_height}">
+                <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0"/>
+      </xacro:cylinder_inertia>
+
      </link>
 
       <joint name="lidar_sensor_joint" type="fixed">

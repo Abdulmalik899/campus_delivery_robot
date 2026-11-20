@@ -5,7 +5,8 @@
    <xacro:property name="wheel_length" value="0.02"/>
    <xacro:property name="castor_radius" value="0.01"/>
    <xacro:property name="castor_xoff" value="0.09"/>
-
+   <xacro:property name="wheel_mass" value="0.03"/>
+   <xacro:property name="castor_mass" value="0.02"/>
 
    <xacro:macro name="bot_wheel" params="prefix reflect">
      <link name="${prefix}wheel_link">
@@ -22,6 +23,11 @@
           </geometry>
           <origin xyz="0 ${reflect*wheel_length/2} 0" rpy="${pi/2} 0 0"/>
        </collision> 
+      <xacro:cylinder_inertia m="${wheel_mass}" r="${wheel_radius}" h="${wheel_length}">
+          <origin xyz="0 ${reflect*wheel_length/2} 0" rpy="${pi/2} 0 0"/>
+      </xacro:cylinder_inertia>
+
+
      </link>
      <joint name="base_${prefix}wheel_joint" type="continuous">
         <parent link="base_link"/>
@@ -40,12 +46,18 @@
        <origin xyz="0 0 ${-castor_radius} " rpy="0 0 0 "  />
        <material name="blue"/>
      </visual>
+     
      <collision>
        <geometry>
          <sphere radius="${castor_radius}"/>
        </geometry>
        <origin xyz="0 0 ${-castor_radius} " rpy="0 0 0 "  />
      </collision>
+  
+    <xacro:sphere_inertia m="${castor_mass}" r="${castor_radius}">
+         <origin xyz="0 0 ${-castor_radius} " rpy="0 0 0 "  />
+    </xacro:sphere_inertia>
+
     </link>           
 
     <joint name="${prefix}castor_wheel_joint" type="fixed">
