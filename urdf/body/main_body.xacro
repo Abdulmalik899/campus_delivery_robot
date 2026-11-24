@@ -61,12 +61,13 @@
      </xacro:box_inertia>
   </link>
 
-  <joint name="below_hatch_door_joint" type="fixed">
+  <joint name="below_hatch_door_joint" type="revolute">
     <parent link="main_body_below_hatch_link"/>
     <child  link="below_hatch_door_link"/>
     <origin xyz="${hatch_main_base_length/2} ${hatch_main_base_width/2} 0" rpy="0 0 0"/>
     <axis xyz="0 0 1"/>
     <limit lower="0" upper="1.57" effort="5.0" velocity="1.0"/>
+    <dynamics damping="0.5" friction="0.1"/>
   </joint>
 </xacro:macro>
 
@@ -119,12 +120,13 @@
      </xacro:box_inertia>
   </link>
 
-  <joint name="above_hatch_door_joint" type="fixed">
+  <joint name="above_hatch_door_joint" type="revolute">
     <parent link="main_body_above_hatch_link"/>
     <child  link="above_hatch_door_link"/>
     <origin xyz="${hatch_main_base_length/2} ${hatch_main_base_width/2} 0" rpy="0 0 0"/>
     <axis xyz="0 0 -1"/>
     <limit lower="0" upper="1.57" effort="5.0" velocity="1.0"/>
+    <dynamics damping="0.5" friction="0.1"/>
   </joint>
 </xacro:macro>
 
